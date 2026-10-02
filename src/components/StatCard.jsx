@@ -1,0 +1,1 @@
+export default function StatCard({ label, value, sub }) { return ( <div className="bg-surface rounded-xl2 shadow-card px-5 py-4 flex-1 min-w-[140px]"> <p className="text-sm text-muted">{label}</p> <p className="font-display text-3xl font-semibold text-ink mt-1">{value}</p> {sub && <p className="text-xs text-muted mt-1">{sub}</p>} </div> ) }
