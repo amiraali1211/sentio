@@ -1,12 +1,14 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import 'bootstrap-icons/font/bootstrap-icons.css'
 
 const navItems = [
-  { path: '/dashboard', label: 'Dashboard' },
-  { path: '/analyses', label: 'Analyses' },
-  { path: '/reports', label: 'Reports' },
-  { path: '/sources', label: 'Sources' },
-  { path: '/settings', label: 'Settings' },
+  { path: '/dashboard', label: 'Dashboard', icon: 'bi-speedometer2' },
+  { path: '/analyses', label: 'Analyses', icon: 'bi-graph-up-arrow' },
+  { path: '/reports', label: 'Reports', icon: 'bi-file-earmark-bar-graph' },
+  { path: '/sources', label: 'Sources', icon: 'bi-diagram-3' },
+  { path: '/settings', label: 'Settings', icon: 'bi-gear' },
+  { path: '/pricing', label: 'Pricing', icon: 'bi-tag' },
 ]
 
 export default function Navbar({ onMenuClick }) {
@@ -25,16 +27,12 @@ export default function Navbar({ onMenuClick }) {
 
   const handleLogout = () => {
     localStorage.removeItem('token')
+    localStorage.removeItem('accountType')
     window.dispatchEvent(new Event('authchange'))
     navigate('/login')
   }
 
-  const linkStyle = ({ isActive }) => ({
-    color: isActive ? '#F4A261' : 'rgba(255,255,255,0.8)',
-    textDecoration: 'none', fontSize: '15px', fontWeight: 500,
-    paddingBottom: '4px',
-    borderBottom: isActive ? '2px solid #F4A261' : '2px solid transparent',
-  })
+  const linkClass = ({ isActive }) => `nav-item-link${isActive ? ' active' : ''}`
 
   return (
     <nav style={{
@@ -47,29 +45,47 @@ export default function Navbar({ onMenuClick }) {
         Sentio<span style={{ color: 'rgba(255,255,255,0.4)' }}>.</span>
       </NavLink>
 
-      <ul className="desktop-nav" style={{ display: 'flex', gap: '32px', listStyle: 'none', margin: 0, alignItems: 'center' }}>
+      <ul className="desktop-nav" style={{ display: 'flex', gap: '28px', listStyle: 'none', margin: 0, alignItems: 'center' }}>
         {navItems.map((item) => (
           <li key={item.path}>
-            <NavLink to={item.path} style={linkStyle}>{item.label}</NavLink>
+            <NavLink to={item.path} className={linkClass}>
+              <i className={`bi ${item.icon}`}></i>
+              {item.label}
+            </NavLink>
           </li>
         ))}
 
         {isLoggedIn ? (
           <>
-            <li><NavLink to="/profile" style={linkStyle}>My Profile</NavLink></li>
             <li>
-              <button onClick={handleLogout} style={{
-                color: 'rgba(255,255,255,0.8)', fontSize: '15px', fontWeight: 500,
-                background: 'none', border: 'none', cursor: 'pointer', padding: '0'
+              <NavLink to="/profile" className={linkClass}>
+                <i className="bi bi-person-circle"></i>
+                My Profile
+              </NavLink>
+            </li>
+            <li>
+              <button onClick={handleLogout} className="nav-item-link" style={{
+                background: 'none', border: 'none', cursor: 'pointer', padding: 0, paddingBottom: '5px'
               }}>
+                <i className="bi bi-box-arrow-right"></i>
                 Logout
               </button>
             </li>
           </>
         ) : (
           <>
-            <li><NavLink to="/login" style={linkStyle}>Login</NavLink></li>
-            <li><NavLink to="/register" style={linkStyle}>Register</NavLink></li>
+            <li>
+              <NavLink to="/login" className={linkClass}>
+                <i className="bi bi-box-arrow-in-right"></i>
+                Login
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/register" className={linkClass}>
+                <i className="bi bi-person-plus"></i>
+                Register
+              </NavLink>
+            </li>
           </>
         )}
       </ul>

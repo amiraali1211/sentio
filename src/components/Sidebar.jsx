@@ -1,12 +1,14 @@
 import { NavLink } from 'react-router-dom'
+import 'bootstrap-icons/font/bootstrap-icons.css'
 
 const navItems = [
-  { path: '/dashboard', label: 'Dashboard' },
-  { path: '/analyses', label: 'Analyses' },
-  { path: '/reports', label: 'Reports' },
-  { path: '/sources', label: 'Sources' },
-  { path: '/settings', label: 'Settings' },
-  { path: '/profile', label: 'Profile' },
+  { path: '/dashboard', label: 'Dashboard', icon: 'bi-speedometer2' },
+  { path: '/analyses', label: 'Analyses', icon: 'bi-graph-up-arrow' },
+  { path: '/reports', label: 'Reports', icon: 'bi-file-earmark-bar-graph' },
+  { path: '/sources', label: 'Sources', icon: 'bi-diagram-3' },
+  { path: '/settings', label: 'Settings', icon: 'bi-gear' },
+  { path: '/pricing', label: 'Pricing', icon: 'bi-tag' },
+  { path: '/profile', label: 'Profile', icon: 'bi-person-circle' },
 ]
 
 export default function Sidebar({ isOpen, onClose }) {
@@ -39,11 +41,12 @@ export default function Sidebar({ isOpen, onClose }) {
                 to={item.path}
                 onClick={onClose}
                 className={({ isActive }) =>
-                  `block px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                  `flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                     isActive ? 'bg-primary text-white' : 'text-white/70 hover:bg-white/10'
                   }`
                 }
               >
+                <i className={`bi ${item.icon}`}></i>
                 {item.label}
               </NavLink>
             </li>

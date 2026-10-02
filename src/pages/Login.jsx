@@ -1,55 +1,201 @@
 import { useNavigate, Link } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap-icons/font/bootstrap-icons.css'
 
 export default function Login() {
   const navigate = useNavigate()
 
-const handleSubmit = (e) => {
-  e.preventDefault()
-  localStorage.setItem('token', 'demo-token')
-  window.dispatchEvent(new Event('authchange'))
-  navigate('/dashboard')
-}
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    localStorage.setItem('token', 'demo-token')
+    localStorage.setItem('accountType', 'free')
+    window.dispatchEvent(new Event('authchange'))
+
+    navigate('/dashboard')
+  }
+
+  const handleGuest = () => {
+    localStorage.setItem('token', 'guest-token')
+    localStorage.setItem('accountType', 'guest')
+    window.dispatchEvent(new Event('authchange'))
+
+    navigate('/dashboard')
+  }
 
   return (
-    <main className="flex items-center justify-center px-4 py-16 min-h-[calc(100vh-72px)]">
-      <div className="bg-surface rounded-xl2 shadow-card w-full max-w-sm px-7 py-8">
-        <h1 className="font-display text-2xl font-semibold text-ink mb-1">Welcome back</h1>
-        <p className="text-sm text-muted mb-6">Log in to your Sentio account.</p>
+    <div className="container-fluid min-vh-100 p-0">
+      <div className="row g-0 min-vh-100">
 
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <div>
-            <label className="text-sm text-ink block mb-1">Email</label>
-            <input
-              type="email"
-              required
-              placeholder="you@example.com"
-              className="w-full rounded-lg border border-primary/20 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-            />
+        {/* Left Side */}
+        <div
+          className="col-lg-5 d-none d-lg-flex flex-column justify-content-between text-white p-5"
+          style={{
+            background: 'linear-gradient(160deg, #5B3FE3, #14123B)'
+          }}
+        >
+          <div className="fs-2 fw-semibold">
+            Sentio<span style={{ color: 'rgba(255,255,255,0.4)' }}>.</span>
           </div>
-          <div>
-            <label className="text-sm text-ink block mb-1">Password</label>
-            <input
-              type="password"
-              required
-              placeholder="••••••••"
-              className="w-full rounded-lg border border-primary/20 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-          </div>
-          <button
-            type="submit"
-            className="mt-2 bg-primary text-white rounded-lg py-2.5 text-sm font-medium hover:bg-primary-dark transition-colors"
-          >
-            Log in
-          </button>
-        </form>
 
-        <p className="text-sm text-muted text-center mt-6">
-          Don't have an account?{' '}
-          <Link to="/register" className="text-primary font-medium hover:underline">
-            Sign up
-          </Link>
-        </p>
+          <div className="text-center">
+            <div
+              className="d-inline-flex align-items-center justify-content-center rounded-circle mb-4"
+              style={{
+                width: '90px',
+                height: '90px',
+                background: 'rgba(255,255,255,0.12)'
+              }}
+            >
+              <i className="bi bi-bar-chart-line-fill fs-1"></i>
+            </div>
+
+            <h2 className="fw-semibold mb-3">
+              Welcome back to Sentio.
+            </h2>
+
+            <p className="text-white-50">
+              Continue exploring customer sentiment and discover
+              what people really think.
+            </p>
+          </div>
+
+          <div className="text-white-50 small">
+            © 2026 Sentio
+          </div>
+        </div>
+
+        {/* Right Side */}
+        <div className="col-lg-7 d-flex align-items-center justify-content-center p-4 p-md-5 bg-light">
+          <div className="w-100" style={{ maxWidth: '420px' }}>
+
+            <div className="text-center text-lg-start mb-4">
+
+              <div
+                className="d-inline-flex align-items-center justify-content-center rounded-circle mb-3"
+                style={{
+                  width: '50px',
+                  height: '50px',
+                  background: '#EEEAFE',
+                  color: '#5B3FE3'
+                }}
+              >
+                <i className="bi bi-box-arrow-in-right fs-5"></i>
+              </div>
+
+              <h1
+                className="fw-semibold mb-1"
+                style={{ color: '#14123B' }}
+              >
+                Welcome back
+              </h1>
+
+              <p className="text-muted mb-0">
+                Log in to your Sentio account.
+              </p>
+
+            </div>
+
+            <form onSubmit={handleSubmit}>
+
+              {/* Email */}
+              <div className="mb-3">
+                <label className="form-label">
+                  Email
+                </label>
+
+                <div className="input-group input-group-lg">
+                  <span className="input-group-text bg-white">
+                    <i
+                      className="bi bi-envelope"
+                      style={{ color: '#5B3FE3' }}
+                    ></i>
+                  </span>
+
+                  <input
+                    type="email"
+                    className="form-control"
+                    placeholder="you@example.com"
+                    required
+                  />
+                </div>
+              </div>
+
+              {/* Password */}
+              <div className="mb-4">
+                <label className="form-label">
+                  Password
+                </label>
+
+                <div className="input-group input-group-lg">
+                  <span className="input-group-text bg-white">
+                    <i
+                      className="bi bi-lock"
+                      style={{ color: '#5B3FE3' }}
+                    ></i>
+                  </span>
+
+                  <input
+                    type="password"
+                    className="form-control"
+                    placeholder="••••••••"
+                    required
+                  />
+                </div>
+              </div>
+
+              {/* Login Button */}
+              <button
+                type="submit"
+                className="btn btn-lg w-100 text-white fw-medium"
+                style={{ backgroundColor: '#5B3FE3' }}
+              >
+                <i className="bi bi-box-arrow-in-right me-2"></i>
+                Log in
+              </button>
+
+            </form>
+
+            {/* Divider */}
+            <div className="d-flex align-items-center my-4">
+              <div className="flex-grow-1 border-top"></div>
+              <span className="px-3 text-muted small">or</span>
+              <div className="flex-grow-1 border-top"></div>
+            </div>
+
+            {/* Guest Button */}
+            <button
+              onClick={handleGuest}
+              className="btn btn-lg w-100 fw-medium"
+              style={{
+                border: '1px solid #5B3FE3',
+                color: '#5B3FE3',
+                background: 'white'
+              }}
+            >
+              <i className="bi bi-person me-2"></i>
+              Continue as guest
+            </button>
+
+            <p className="text-center text-muted mt-4 mb-0">
+              Don't have an account?{' '}
+
+              <Link
+                to="/register"
+                style={{
+                  color: '#5B3FE3',
+                  fontWeight: 500,
+                  textDecoration: 'none'
+                }}
+              >
+                Create an account
+              </Link>
+            </p>
+
+          </div>
+        </div>
+
       </div>
-    </main>
+    </div>
   )
 }
