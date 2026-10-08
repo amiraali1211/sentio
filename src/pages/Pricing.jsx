@@ -21,59 +21,62 @@ export default function Pricing() {
 
   return (
     <main className="px-4 md:px-8 py-16 max-w-4xl mx-auto">
-      <h1 className="font-display text-3xl font-semibold text-ink text-center mb-2">
+      <h1 className="font-display text-3xl font-semibold text-[#15103d] text-center mb-2">
         Simple, transparent pricing
       </h1>
-      <p className="text-muted text-center mb-12">
+      <p className="text-[#6E6B8A] text-center mb-12">
         Start free as a guest, or unlock full analysis with Premium.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-surface rounded-xl2 shadow-card px-7 py-8 flex flex-col">
-          <h2 className="font-display text-xl font-semibold text-ink mb-1">Guest</h2>
-          <p className="text-muted text-sm mb-4">Try Sentio instantly, no account needed.</p>
-          <p className="font-display text-3xl font-semibold text-ink mb-6">Free</p>
-          <ul className="text-sm text-muted flex flex-col gap-2 mb-8">
-            <li>✓ Limited opinions per analysis</li>
-            <li>✓ Overall + aspect sentiment</li>
-            <li>✓ No saved reports</li>
+        <div className="bg-white rounded-3xl shadow-lg shadow-[#5737f4]/10 px-7 py-8 flex flex-col border border-[#5737f4]/10">
+          <h2 className="font-display text-xl font-semibold text-[#15103d] mb-1">Guest</h2>
+          <p className="text-[#6E6B8A] text-sm mb-4">Try Sentio instantly, no account needed.</p>
+          <p className="font-display text-3xl font-semibold text-[#15103d] mb-6">Free</p>
+          <ul className="text-sm text-[#6E6B8A] flex flex-col gap-2 mb-8">
+            <li><span className="text-[#5737f4] font-bold">✓</span> Limited opinions per analysis</li>
+            <li><span className="text-[#5737f4] font-bold">✓</span> Overall + aspect sentiment</li>
+            <li><span className="text-[#5737f4] font-bold">✓</span> No saved reports</li>
           </ul>
           <button
             onClick={handleGuest}
-            className="mt-auto bg-primary-soft text-primary rounded-lg py-2.5 text-sm font-medium hover:bg-primary hover:text-white transition-colors"
+            className="mt-auto border-2 border-[#5737f4] text-[#5737f4] rounded-xl py-2.5 text-sm font-semibold hover:bg-[#5737f4] hover:text-white transition-colors"
           >
             Continue as guest
           </button>
         </div>
 
-        <div className="bg-ink text-white rounded-xl2 shadow-soft px-7 py-8 flex flex-col">
+        <div className="relative bg-[#15103d] text-white rounded-3xl shadow-xl shadow-[#5737f4]/30 px-7 py-8 flex flex-col">
+          <span className="absolute -top-3 right-6 bg-[#ffc229] text-[#15103d] text-xs font-bold px-3 py-1 rounded-full">
+            Most popular
+          </span>
           <h2 className="font-display text-xl font-semibold mb-1">Premium</h2>
           <p className="text-white/60 text-sm mb-4">Full analysis power for individuals and teams.</p>
           <p className="font-display text-3xl font-semibold mb-6">
             $9<span className="text-base text-white/60 font-normal"> /month</span>
           </p>
-          <ul className="text-sm text-white/70 flex flex-col gap-2 mb-8">
-            <li>✓ Unlimited opinions per analysis</li>
-            <li>✓ Saved, shareable reports</li>
-            <li>✓ Sarcasm & promo-content filtering</li>
-            <li>✓ Priority data sources</li>
+          <ul className="text-sm text-white/80 flex flex-col gap-2 mb-8">
+            <li><span className="text-[#ffc229] font-bold">✓</span> Unlimited opinions per analysis</li>
+            <li><span className="text-[#ffc229] font-bold">✓</span> Saved, shareable reports</li>
+            <li><span className="text-[#ffc229] font-bold">✓</span> Sarcasm &amp; promo-content filtering</li>
+            <li><span className="text-[#ffc229] font-bold">✓</span> Priority data sources</li>
           </ul>
           <button
             onClick={handlePremium}
-            className="mt-auto bg-primary text-white rounded-lg py-2.5 text-sm font-medium hover:bg-primary-dark transition-colors"
+            className="mt-auto bg-[#ffc229] text-[#15103d] rounded-xl py-2.5 text-sm font-bold hover:bg-[#e6a800] transition-colors"
           >
             Go Premium
           </button>
         </div>
       </div>
 
-      <p className="text-center text-xs text-muted mt-8">
+      <p className="text-center text-xs text-[#6E6B8A] mt-8">
         Payments aren't live yet — this demo activates Premium features instantly for testing.
       </p>
 
-      <p className="text-center text-sm text-muted mt-2">
+      <p className="text-center text-sm text-[#6E6B8A] mt-2">
         Already have an account?{' '}
-        <Link to="/login" className="text-primary font-medium hover:underline">Log in</Link>
+        <Link to="/login" className="text-[#5737f4] font-semibold hover:underline">Log in</Link>
       </p>
     </main>
   )

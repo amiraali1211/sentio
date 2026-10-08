@@ -31,11 +31,11 @@ export default function Login() {
         <div
           className="col-lg-5 d-none d-lg-flex flex-column justify-content-between text-white p-5"
           style={{
-            background: 'linear-gradient(160deg, #5B3FE3, #14123B)'
+            background: 'linear-gradient(160deg, #5737f4, #15103d)'
           }}
         >
           <div className="fs-2 fw-semibold">
-            Sentio<span style={{ color: 'rgba(255,255,255,0.4)' }}>.</span>
+            Sentio<span style={{ color: '#ffc229' }}>.</span>
           </div>
 
           <div className="text-center">
@@ -44,7 +44,8 @@ export default function Login() {
               style={{
                 width: '90px',
                 height: '90px',
-                background: 'rgba(255,255,255,0.12)'
+                background: '#ffc229',
+                color: '#15103d'
               }}
             >
               <i className="bi bi-bar-chart-line-fill fs-1"></i>
@@ -66,7 +67,10 @@ export default function Login() {
         </div>
 
         {/* Right Side */}
-        <div className="col-lg-7 d-flex align-items-center justify-content-center p-4 p-md-5 bg-light">
+        <div
+          className="col-lg-7 d-flex align-items-center justify-content-center p-4 p-md-5"
+          style={{ background: '#F6F4FE' }}
+        >
           <div className="w-100" style={{ maxWidth: '420px' }}>
 
             <div className="text-center text-lg-start mb-4">
@@ -76,8 +80,8 @@ export default function Login() {
                 style={{
                   width: '50px',
                   height: '50px',
-                  background: '#EEEAFE',
-                  color: '#5B3FE3'
+                  background: '#ECE8FE',
+                  color: '#5737f4'
                 }}
               >
                 <i className="bi bi-box-arrow-in-right fs-5"></i>
@@ -85,7 +89,7 @@ export default function Login() {
 
               <h1
                 className="fw-semibold mb-1"
-                style={{ color: '#14123B' }}
+                style={{ color: '#15103d' }}
               >
                 Welcome back
               </h1>
@@ -108,7 +112,7 @@ export default function Login() {
                   <span className="input-group-text bg-white">
                     <i
                       className="bi bi-envelope"
-                      style={{ color: '#5B3FE3' }}
+                      style={{ color: '#5737f4' }}
                     ></i>
                   </span>
 
@@ -131,7 +135,7 @@ export default function Login() {
                   <span className="input-group-text bg-white">
                     <i
                       className="bi bi-lock"
-                      style={{ color: '#5B3FE3' }}
+                      style={{ color: '#5737f4' }}
                     ></i>
                   </span>
 
@@ -147,8 +151,8 @@ export default function Login() {
               {/* Login Button */}
               <button
                 type="submit"
-                className="btn btn-lg w-100 text-white fw-medium"
-                style={{ backgroundColor: '#5B3FE3' }}
+                className="btn btn-lg w-100 fw-semibold"
+                style={{ backgroundColor: '#ffc229', color: '#15103d', border: 'none' }}
               >
                 <i className="bi bi-box-arrow-in-right me-2"></i>
                 Log in
@@ -168,8 +172,8 @@ export default function Login() {
               onClick={handleGuest}
               className="btn btn-lg w-100 fw-medium"
               style={{
-                border: '1px solid #5B3FE3',
-                color: '#5B3FE3',
+                border: '1px solid #5737f4',
+                color: '#5737f4',
                 background: 'white'
               }}
             >
@@ -183,8 +187,8 @@ export default function Login() {
               <Link
                 to="/register"
                 style={{
-                  color: '#5B3FE3',
-                  fontWeight: 500,
+                  color: '#5737f4',
+                  fontWeight: 600,
                   textDecoration: 'none'
                 }}
               >

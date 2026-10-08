@@ -1,6 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
- @import "tailwindcss"; * { box-sizing: border-box; } body { margin: 0; background: #F5F3FC; color: #14123B; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; } h1, h2, h3, .font-display { font-family: 'Space Grotesk', sans-serif; }
- @media (max-width: 860px) {
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #F6F4FE;
+  color: #15103d;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .font-display {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+@media (max-width: 860px) {
   .desktop-nav {
     display: none !important;
   }
@@ -8,25 +26,27 @@
     display: flex !important;
   }
 }
+
 .nav-item-link {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  color: rgba(255, 255, 255, 0.8);
+  color: #ffffff;
   text-decoration: none;
   font-size: 15px;
-  font-weight: 500;
-  padding-bottom: 5px;
-  border-bottom: 2px solid transparent;
-  transition: color 0.2s ease, border-color 0.2s ease;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .nav-item-link:hover {
+  background: rgba(255, 255, 255, 0.22);
   color: #ffffff;
-  border-bottom-color: rgba(244, 162, 97, 0.5);
 }
 
 .nav-item-link.active {
-  color: #F4A261;
-  border-bottom-color: #F4A261;
+  background: #15103d;
+  color: #ffffff;
 }

@@ -37,7 +37,7 @@ export default function Navbar({ onMenuClick }) {
   return (
     <nav style={{
       display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-      background: 'linear-gradient(90deg, #5B3FE3, #14123B)',
+      background: 'linear-gradient(90deg, #5737f4, #ffc229)',
       padding: '14px 24px', position: 'sticky', top: 0,
       zIndex: 997, boxShadow: '0 2px 10px rgba(0,0,0,0.3)'
     }}>
