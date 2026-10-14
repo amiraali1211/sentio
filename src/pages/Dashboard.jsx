@@ -70,16 +70,16 @@ export default function Dashboard() {
     <main className="px-4 md:px-8 pb-10 max-w-7xl mx-auto">
       <header className="flex flex-wrap items-start justify-between gap-4 pt-6 pb-4">
         <div>
-          <h1 className="font-display text-3xl font-semibold text-[#14123B]">{subject}</h1>
+          <h1 className="font-display text-3xl font-semibold text-[#15103d]">{subject}</h1>
           <p className="text-sm text-[#6E6B8A] mt-1">
             {reviews.length} reviews from {sources.length} sources, analyzed {latest.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
           </p>
         </div>
         <div className="flex gap-2">
-          <button type="button" onClick={share} className="rounded-lg border border-[#5B3FE3]/20 bg-white px-4 py-2 text-sm font-medium text-[#14123B] hover:bg-[#EDE9FE] transition-colors">
+          <button type="button" onClick={share} className="rounded-lg border border-[#5737f4]/25 bg-white px-4 py-2 text-sm font-medium text-[#15103d] hover:bg-[#ECE8FE] transition-colors">
             {copied ? 'Link copied' : 'Share'}
           </button>
-          <button type="button" onClick={() => window.print()} className="rounded-lg bg-[#5B3FE3] px-4 py-2 text-sm font-medium text-white hover:bg-[#4529C4] transition-colors">
+          <button type="button" onClick={() => window.print()} className="rounded-lg bg-[#5737f4] px-4 py-2 text-sm font-medium text-white hover:bg-[#3d26bd] transition-colors">
             Export PDF
           </button>
         </div>
@@ -89,10 +89,10 @@ export default function Dashboard() {
 
       <div className="flex flex-col gap-6 mt-6">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          <KpiCard label="Net sentiment score" value={signed(stats.score)} delta={hasPrior ? recent.score - prior.score : null} data={series} dataKey="score" color={C.primary} />
-          <KpiCard label="Reviews analyzed" value={stats.total} delta={volumeDelta} unit="%" data={series} dataKey="total" color="#8B7BEA" />
-          <KpiCard label="Positive share" value={`${stats.pos}%`} delta={hasPrior ? recent.pos - prior.pos : null} data={series} dataKey="posPct" color={C.positive} />
-          <KpiCard label="Flagged by SENTIO" value={`${stats.flaggedPct}%`} delta={hasPrior ? recent.flaggedPct - prior.flaggedPct : null} goodWhenUp={false} data={series} dataKey="flaggedPct" color={C.accent} highlight />
+          <KpiCard label="Net sentiment score" value={signed(stats.score)} delta={hasPrior ? recent.score - prior.score : null} data={series} dataKey="score" color="#ffffff" />
+          <KpiCard label="Reviews analyzed" value={stats.total} delta={volumeDelta} unit="%" data={series} dataKey="total" color="#C9BFFF" />
+          <KpiCard label="Positive share" value={`${stats.pos}%`} delta={hasPrior ? recent.pos - prior.pos : null} data={series} dataKey="posPct" color={C.yellow} />
+          <KpiCard label="Flagged by SENTIO" value={`${stats.flaggedPct}%`} delta={hasPrior ? recent.flaggedPct - prior.flaggedPct : null} goodWhenUp={false} data={series} dataKey="flaggedPct" color={C.ink} tone="yellow" />
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

@@ -1,8 +1,20 @@
 import Card from './Card'
 import { summarize } from '../lib/analytics'
 
-const cellColor = (score) =>
-  score >= 0 ? `rgba(34,197,94,${0.12 + 0.65 * (score / 100)})` : `rgba(239,68,68,${0.12 + 0.65 * (-score / 100)})`
+const STEPS = [
+  { label: 'Strongly negative', bg: '#FF6B93', fg: '#15103d' },
+  { label: 'Negative', bg: '#FFC2D3', fg: '#15103d' },
+  { label: 'Near neutral', bg: '#EDE9FE', fg: '#15103d' },
+  { label: 'Positive', bg: '#B9ACFB', fg: '#15103d' },
+  { label: 'Strongly positive', bg: '#5737f4', fg: '#ffffff' },
+]
+function stepFor(score) {
+  if (score <= -50) return 0
+  if (score <= -10) return 1
+  if (score < 10) return 2
+  if (score < 50) return 3
+  return 4
+}
 
 export default function Heatmap({ list, aspects, sources, selectedAspect, selectedSource, onPick }) {
   return (
@@ -15,10 +27,11 @@ export default function Heatmap({ list, aspects, sources, selectedAspect, select
           ))}
           {aspects.map((a) => (
             <div key={a} className="contents">
-              <div className="text-sm text-[#14123B] flex items-center">{a}</div>
+              <div className="text-sm flex items-center">{a}</div>
               {sources.map((s) => {
                 const cell = list.filter((r) => r.aspect === a && r.source === s)
                 const { score } = summarize(cell)
+                const step = STEPS[stepFor(score)]
                 const active = selectedAspect === a && selectedSource === s
                 return (
                   <button
@@ -27,8 +40,8 @@ export default function Heatmap({ list, aspects, sources, selectedAspect, select
                     disabled={!cell.length}
                     title={cell.length ? `${a} on ${s}: ${score > 0 ? '+' : ''}${score} (${cell.length} reviews)` : 'No reviews'}
                     onClick={() => onPick(a, s)}
-                    className={`h-11 rounded-lg text-sm font-medium text-[#14123B] transition-transform hover:scale-[1.04] disabled:bg-slate-50 disabled:text-slate-300 disabled:hover:scale-100 ${active ? 'ring-2 ring-[#5B3FE3]' : ''}`}
-                    style={cell.length ? { background: cellColor(score) } : undefined}
+                    className={`h-11 rounded-lg text-sm font-semibold transition-transform hover:scale-[1.04] disabled:bg-[#F6F4FE] disabled:text-[#C4BFDD] disabled:hover:scale-100 ${active ? 'ring-2 ring-[#15103d]' : ''}`}
+                    style={cell.length ? { background: step.bg, color: step.fg } : undefined}
                   >
                     {cell.length ? `${score > 0 ? '+' : ''}${score}` : '–'}
                   </button>
@@ -38,10 +51,12 @@ export default function Heatmap({ list, aspects, sources, selectedAspect, select
           ))}
         </div>
       </div>
-      <div className="mt-4 flex items-center gap-2 text-[11px] text-[#6E6B8A]">
-        <span>Negative</span>
-        <div className="h-2 flex-1 rounded-full" style={{ background: 'linear-gradient(90deg, rgba(239,68,68,.75), #F1F5F9, rgba(34,197,94,.75))' }} />
-        <span>Positive</span>
+      <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-[#6E6B8A]">
+        {STEPS.map((s) => (
+          <span key={s.label} className="flex items-center gap-1.5">
+            <span className="h-3 w-3 rounded" style={{ background: s.bg }} />{s.label}
+          </span>
+        ))}
       </div>
     </Card>
   )

@@ -7,7 +7,7 @@ export default function Segmented({ options, value, onChange }) {
           type="button"
           aria-pressed={value === o.value}
           onClick={() => onChange(o.value)}
-          className={`rounded-md px-3 py-1 transition-colors ${value === o.value ? 'bg-white text-[#5B3FE3] shadow-sm' : 'text-[#6E6B8A]'}`}
+          className={`rounded-md px-3 py-1 transition-colors ${value === o.value ? 'bg-[#5737f4] text-white shadow-sm' : 'text-[#5737f4]/80 hover:text-[#5737f4]'}`}
         >
           {o.label}
         </button>

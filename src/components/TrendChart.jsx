@@ -1,11 +1,12 @@
 import { Area, AreaChart, CartesianGrid, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import Card from './Card'
 import Segmented from './Segmented'
-import { SENT, SENTIMENTS, axis, tip, C } from '../lib/theme'
+import { SENT, SENTIMENTS, axis, tip, C, legendText } from '../lib/theme'
 
 export default function TrendChart({ data, percent, onModeChange }) {
   return (
     <Card
+      className="h-full"
       title="Sentiment over time"
       subtitle="Hover for weekly counts"
       action={<Segmented value={percent ? 'share' : 'volume'} onChange={(v) => onModeChange(v === 'share')} options={[{ value: 'volume', label: 'Volume' }, { value: 'share', label: 'Share %' }]} />}
@@ -20,9 +21,9 @@ export default function TrendChart({ data, percent, onModeChange }) {
               <XAxis dataKey="label" tick={axis} tickLine={false} axisLine={{ stroke: C.grid }} />
               <YAxis tick={axis} tickLine={false} axisLine={false} tickFormatter={percent ? (v) => `${Math.round(v * 100)}%` : undefined} />
               <Tooltip {...tip} />
-              <Legend iconType="circle" wrapperStyle={{ fontSize: 12 }} />
+              <Legend iconType="circle" wrapperStyle={{ fontSize: 12 }} formatter={legendText} />
               {SENTIMENTS.map((s) => (
-                <Area key={s} type="monotone" dataKey={s} stackId="1" stroke={SENT[s]} fill={SENT[s]} fillOpacity={0.55} strokeWidth={2} />
+                <Area key={s} type="monotone" dataKey={s} stackId="1" stroke={SENT[s]} fill={SENT[s]} fillOpacity={0.9} strokeWidth={1.5} />
               ))}
             </AreaChart>
           </ResponsiveContainer>

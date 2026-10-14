@@ -11,8 +11,6 @@ export default function Pricing() {
   }
 
   const handlePremium = () => {
-    // DEMO ONLY — no real payment is processed here.
-    // Wire this to Stripe (or similar) + a backend once you have one.
     localStorage.setItem('token', 'premium-token')
     localStorage.setItem('accountType', 'premium')
     window.dispatchEvent(new Event('authchange'))
@@ -70,14 +68,16 @@ export default function Pricing() {
         </div>
       </div>
 
-      <p className="text-center text-xs text-[#6E6B8A] mt-8">
-        Payments aren't live yet — this demo activates Premium features instantly for testing.
-      </p>
+      <div className="mt-10">
+        <p className="text-center text-xs text-[#6E6B8A]">
+          Payments aren't live yet — this demo activates Premium features instantly for testing.
+        </p>
 
-      <p className="text-center text-sm text-[#6E6B8A] mt-2">
-        Already have an account?{' '}
-        <Link to="/login" className="text-[#5737f4] font-semibold hover:underline">Log in</Link>
-      </p>
+        <p className="text-center text-sm text-[#6E6B8A] mt-2">
+          Already have an account?{' '}
+          <Link to="/login" className="text-[#5737f4] font-semibold hover:underline">Log in</Link>
+        </p>
+      </div>
     </main>
   )
 }

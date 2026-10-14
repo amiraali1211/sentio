@@ -27,6 +27,7 @@ h1, h2, h3, .font-display {
   }
 }
 
+/* Navbar links: white on purple. Yellow (the opposite color) marks where you are. */
 .nav-item-link {
   display: inline-flex;
   align-items: center;
@@ -34,7 +35,7 @@ h1, h2, h3, .font-display {
   color: #ffffff;
   text-decoration: none;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
   padding: 7px 14px;
   border-radius: 999px;
   border: none;
@@ -42,11 +43,24 @@ h1, h2, h3, .font-display {
 }
 
 .nav-item-link:hover {
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.16);
   color: #ffffff;
 }
 
 .nav-item-link.active {
-  background: #15103d;
-  color: #ffffff;
+  background: #ffc229;
+  color: #15103d;
+  font-weight: 600;
+}
+
+/* Register: solid white pill, turns yellow on hover */
+.nav-cta {
+  background: #ffffff;
+  color: #5737f4;
+  font-weight: 600;
+}
+
+.nav-cta:hover {
+  background: #ffc229;
+  color: #15103d;
 }

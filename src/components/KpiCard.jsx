@@ -1,18 +1,29 @@
 import { Area, AreaChart, ResponsiveContainer, Tooltip } from 'recharts'
-import Card from './Card'
-import { C, tip } from '../lib/theme'
+import { tip } from '../lib/theme'
 
-export default function KpiCard({ label, value, delta, unit = 'pts', goodWhenUp = true, data, dataKey, color = C.primary, highlight }) {
+const SURFACE = {
+  purple: { background: 'linear-gradient(155deg, #5737f4 0%, #3d26bd 100%)', color: '#ffffff', boxShadow: '0 12px 28px -14px rgba(61,38,189,0.7)' },
+  yellow: { background: '#ffc229', color: '#15103d', boxShadow: '0 12px 28px -14px rgba(180,130,0,0.6)' },
+}
+
+export default function KpiCard({ label, value, delta, unit = 'pts', goodWhenUp = true, data, dataKey, color = '#ffffff', tone = 'purple' }) {
+  const onYellow = tone === 'yellow'
   const flat = delta == null || delta === 0
   const good = !flat && delta > 0 === goodWhenUp
+  const badge = flat
+    ? onYellow ? 'bg-[#15103d]/10 text-[#15103d]' : 'bg-white/15 text-white'
+    : good
+      ? onYellow ? 'bg-[#15103d] text-[#ffc229]' : 'bg-[#ffc229] text-[#15103d]'
+      : 'bg-[#FF7A9E] text-[#15103d]'
   const gid = `kpi-${dataKey}`
+
   return (
-    <Card className={highlight ? 'ring-1 ring-[#F4A261]/60 bg-[#FFF8F2]' : ''}>
-      <p className="text-xs text-[#6E6B8A]">{label}</p>
+    <section className="rounded-[1.25rem] p-5" style={SURFACE[tone]}>
+      <p className={`text-xs ${onYellow ? 'text-[#15103d]/70' : 'text-white/70'}`}>{label}</p>
       <div className="flex items-end justify-between mt-1">
-        <p className="font-display text-3xl font-semibold text-[#14123B]">{value}</p>
+        <p className="font-display text-3xl font-semibold">{value}</p>
         {delta != null && (
-          <span className={`rounded-full px-2 py-0.5 text-xs font-medium ${flat ? 'bg-slate-100 text-slate-500' : good ? 'bg-[#22C55E]/15 text-green-700' : 'bg-[#EF4444]/15 text-red-700'}`}>
+          <span className={`rounded-full px-2 py-0.5 text-xs font-semibold ${badge}`}>
             {delta > 0 ? '▲' : delta < 0 ? '▼' : '–'} {Math.abs(delta)}{unit === '%' ? '%' : ` ${unit}`}
           </span>
         )}
@@ -22,7 +33,7 @@ export default function KpiCard({ label, value, delta, unit = 'pts', goodWhenUp 
           <AreaChart data={data} margin={{ top: 2, right: 0, bottom: 0, left: 0 }}>
             <defs>
               <linearGradient id={gid} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={color} stopOpacity={0.35} />
+                <stop offset="0%" stopColor={color} stopOpacity={0.4} />
                 <stop offset="100%" stopColor={color} stopOpacity={0} />
               </linearGradient>
             </defs>
@@ -31,7 +42,7 @@ export default function KpiCard({ label, value, delta, unit = 'pts', goodWhenUp 
           </AreaChart>
         </ResponsiveContainer>
       </div>
-      <p className="text-[11px] text-[#6E6B8A] mt-1">{delta == null ? 'Weekly trend' : 'vs previous 2 weeks'}</p>
-    </Card>
+      <p className={`text-[11px] mt-1 ${onYellow ? 'text-[#15103d]/70' : 'text-white/70'}`}>{delta == null ? 'Weekly trend' : 'vs previous 2 weeks'}</p>
+    </section>
   )
 }
