@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import 'bootstrap-icons/font/bootstrap-icons.css'
+import LogoMark from './LogoMark'
 
 const navItems = [
   { path: '/dashboard', label: 'Dashboard', icon: 'bi-speedometer2' },
@@ -13,15 +14,6 @@ const navItems = [
 
 const GRADIENT =
   'linear-gradient(90deg, #3d26bd 0%, #5737f4 30%, #9b4fe8 58%, #ff6b93 85%, #ffc229 100%)'
-
-function LogoMark() {
-  return (
-    <svg width="36" height="32" viewBox="0 0 36 32" aria-hidden="true">
-      <path d="M3 5a4 4 0 0 1 4-4h14a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4h-8l-6 5v-5H7a4 4 0 0 1-4-4z" fill="#ffffff" />
-      <path d="M15 15a4 4 0 0 1 4-4h11a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4h-2v4.5l-6-4.5h-3a4 4 0 0 1-4-4z" fill="#ffc229" stroke="#3d26bd" strokeWidth="2" />
-    </svg>
-  )
-}
 
 const linkStyle = ({ isActive }) => ({ textDecoration: 'none', color: isActive ? '#ffffff' : 'rgba(21,16,61,0.7)' })
 const ctaStyle = ({ isActive }) => ({ textDecoration: 'none', color: isActive ? '#ffffff' : '#15103d' })
@@ -59,8 +51,8 @@ export default function Navbar({ onMenuClick }) {
       className="sticky top-0 h-16 flex items-center justify-between px-4 md:px-6 shadow-[0_8px_24px_-12px_rgba(61,38,189,0.6)]"
       style={{ zIndex: 997, background: GRADIENT }}
     >
-      <NavLink to="/" className="inline-flex items-center gap-2.5" style={{ textDecoration: 'none', color: '#ffffff' }}>
-        <LogoMark />
+      <NavLink to="/" className="sentio-logo-link inline-flex items-center gap-2.5" style={{ textDecoration: 'none', color: '#ffffff' }}>
+        <LogoMark className="block h-11 w-auto" />
         <span className="font-display text-[26px] font-semibold leading-none text-white">
           Sentio<span className="text-[#ffc229]">.</span>
         </span>
