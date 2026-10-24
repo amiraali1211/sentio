@@ -15,40 +15,57 @@ const LENS = { cx: 1239, cy: 843, r: 415 }
 const CSS = `
 .lm-move, .lm-counter, .lm-star { transition: transform .9s cubic-bezier(.34,1.25,.64,1); }
 .lm-focus { opacity: 0; transition: opacity .3s ease; }
-.lm-face { transition: fill .45s ease, stroke .45s ease; }
+.lm-base { transition: opacity .01s linear; }
+.lm-bridge { opacity: 0; transition: opacity .45s ease; }
+.lm-flip { transform-box: fill-box; transform-origin: center; transition: transform .6s cubic-bezier(.34,1.25,.64,1); }
+.lm-face { transition: fill .45s ease, stroke .45s ease, opacity .01s linear; }
 .lm-star { transform-box: fill-box; transform-origin: center; }
 .sentio-logo-link:hover .lm-move,
-.sentio-logo-link:focus-visible .lm-move { transform: translate(-599px, 17px) translate(1239px, 843px) rotate(110deg) scale(0.65) translate(-1239px, -843px); }
+.sentio-logo-link:focus-visible .lm-move { transform: translate(-599px, 217px) translate(1239px, 843px) rotate(100deg) scale(0.85) translate(-1239px, -843px); }
 .sentio-logo-link:hover .lm-counter,
-.sentio-logo-link:focus-visible .lm-counter { transform: translate(1239px, 843px) scale(1.5385) rotate(-110deg) translate(-1239px, -843px) translate(599px, -17px); }
+.sentio-logo-link:focus-visible .lm-counter { transform: translate(1239px, 843px) scale(1.1765) rotate(-100deg) translate(-1239px, -843px) translate(599px, -217px); }
 .sentio-logo-link:hover .lm-face,
 .sentio-logo-link:focus-visible .lm-face { fill: #fff; stroke: #fff; }
+.sentio-logo-link:hover .lm-base,
+.sentio-logo-link:focus-visible .lm-base { opacity: 0; transition-delay: .5s; }
+.sentio-logo-link:hover .lm-bridge,
+.sentio-logo-link:focus-visible .lm-bridge { opacity: 1; }
+.sentio-logo-link:hover .lm-flip,
+.sentio-logo-link:focus-visible .lm-flip { transform: scaleY(-1); transition-delay: .3s; }
 .sentio-logo-link:hover .lm-focus,
 .sentio-logo-link:focus-visible .lm-focus { opacity: 1; transition-delay: .2s; }
 .sentio-logo-link:hover .lm-star,
 .sentio-logo-link:focus-visible .lm-star { transform: rotate(360deg) scale(1.15); }
 @media (prefers-reduced-motion: reduce) {
-  .lm-move, .lm-counter, .lm-face, .lm-focus, .lm-star { transition: none; }
+  .lm-move, .lm-counter, .lm-face, .lm-focus, .lm-bridge, .lm-base, .lm-flip, .lm-star { transition: none; }
 }`
 
 export default function LogoMark({ className = '', ...props }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="236 241 1605 1485" className={className} style={{ overflow: "visible" }} aria-hidden="true" {...props}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="236 241 1605 1485" className={className} style={{ overflow: 'visible' }} aria-hidden="true" {...props}>
       <style>{CSS}</style>
       <defs>
         <path id="lm-mask" d={MASK} />
+        <filter id="lm-close" x="-20%" y="-20%" width="140%" height="140%">
+          <feMorphology operator="dilate" radius="48" />
+          <feMorphology operator="erode" radius="48" />
+          <feGaussianBlur stdDeviation="30" />
+          <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 24 -11.5" />
+        </filter>
         <clipPath id="lm-lens"><circle cx={LENS.cx} cy={LENS.cy} r={LENS.r} /></clipPath>
       </defs>
 
-      <path className="lm-face" d={YELLOW_FACE} fill={YELLOW} stroke={YELLOW} strokeWidth="8" strokeLinejoin="round" fillRule="evenodd" />
+      <path className="lm-face lm-base" d={YELLOW_FACE} fill={YELLOW} stroke={YELLOW} strokeWidth="8" strokeLinejoin="round" fillRule="evenodd" />
 
-      {/* Smiling mask */}
-      <use href="#lm-mask" fill="#fff" stroke="#fff" strokeWidth="8" strokeLinejoin="round" fillRule="evenodd" />
-      <path d={SMILE_EYES} fill={INK} fillRule="evenodd" />
-      <path d={SMILE_LIPS} fill={INK} fillRule="evenodd" />
-
-      <path d={SAD_EYES} fill={INK} fillRule="evenodd" />
-      <path d={SAD_LIPS} fill={INK} fillRule="evenodd" />
+      <use className="lm-base" href="#lm-mask" fill="#fff" stroke="#fff" strokeWidth="8" strokeLinejoin="round" fillRule="evenodd" />
+      <g className="lm-bridge" filter="url(#lm-close)" fill="#fff">
+        <use href="#lm-mask" />
+        <path d={YELLOW_FACE} />
+      </g>
+      <path className="lm-flip" d={SMILE_EYES} fill={INK} fillRule="evenodd" />
+      <path className="lm-flip" d={SMILE_LIPS} fill={INK} fillRule="evenodd" />
+      <path className="lm-flip" d={SAD_EYES} fill={INK} fillRule="evenodd" />
+      <path className="lm-flip" d={SAD_LIPS} fill={INK} fillRule="evenodd" />
 
       <g className="lm-focus">
         <g className="lm-move">
@@ -56,8 +73,8 @@ export default function LogoMark({ className = '', ...props }) {
             <g className="lm-counter">
               <path d={YELLOW_FACE} fill={YELLOW} stroke={YELLOW} strokeWidth="30" strokeLinejoin="round" fillRule="evenodd" />
               <use href="#lm-mask" fill={YELLOW} stroke={YELLOW} strokeWidth="30" strokeLinejoin="round" fillRule="evenodd" />
-              <path d={SMILE_EYES} fill={INK} fillRule="evenodd" />
-              <path d={SMILE_LIPS} fill={INK} fillRule="evenodd" />
+              <path className="lm-flip" d={SMILE_EYES} fill={INK} fillRule="evenodd" />
+              <path className="lm-flip" d={SMILE_LIPS} fill={INK} fillRule="evenodd" />
             </g>
           </g>
         </g>
